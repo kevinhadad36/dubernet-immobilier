@@ -348,7 +348,7 @@
     <nav class="menu" aria-label="Navigation principale">
       <a href="#biens">Acheter</a>
       <a href="#vendre">Vendre</a>
-      <a href="#simulateur">Financer</a>
+      <a href="#simulateur">Budget</a>
       <a href="#agence">L'agence</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -374,7 +374,7 @@
   <nav aria-label="Menu mobile">
     <a href="#biens">Acheter</a>
     <a href="#vendre">Vendre</a>
-    <a href="#simulateur">Financer</a>
+    <a href="#simulateur">Budget</a>
     <a href="#agence">L'agence</a>
     <a href="#contact">Contact</a>
   </nav>
@@ -529,31 +529,32 @@
 <section class="sec px" id="simulateur">
   <div class="head">
     <div>
-      <p class="cap muted">Financer</p>
-      <h2 class="d2">Simulez<br><span class="it">votre budget.</span></h2>
+      <p class="cap muted">Budget</p>
+      <h2 class="d2">Votre achat,<br><span class="it">tout compris.</span></h2>
     </div>
-    <p class="lead" style="max-width:400px">Une première idée de vos mensualités et des frais de notaire, avant d'en parler à votre banque ou à votre courtier.</p>
+    <p class="lead" style="max-width:400px">Prix du bien, frais de notaire, travaux : calculez en quelques secondes le vrai coût de votre projet, sans mauvaise surprise le jour de la signature.</p>
   </div>
   <div class="sim">
     <div>
-      <div class="range"><div class="range-top"><span class="cap">Prix du bien</span><b id="vPrix"></b></div><input type="range" id="rPrix" min="50000" max="800000" step="5000" value="250000" aria-label="Prix du bien"></div>
-      <div class="range"><div class="range-top"><span class="cap">Apport personnel</span><b id="vApport"></b></div><input type="range" id="rApport" min="0" max="300000" step="1000" value="30000" aria-label="Apport personnel"></div>
-      <div class="range"><div class="range-top"><span class="cap">Durée</span><b id="vDuree"></b></div><input type="range" id="rDuree" min="10" max="25" step="1" value="20" aria-label="Durée du prêt en années"></div>
-      <div class="range"><div class="range-top"><span class="cap">Taux annuel</span><b id="vTaux"></b></div><input type="range" id="rTaux" min="1" max="6" step="0.05" value="3.4" aria-label="Taux d'intérêt annuel"></div>
+      <div class="range"><div class="range-top"><span class="cap">Prix du bien</span><b id="vPrix"></b></div><input type="range" id="rPrix" min="30000" max="800000" step="5000" value="250000" aria-label="Prix du bien"></div>
+      <div class="range"><div class="range-top"><span class="cap">Surface</span><b id="vSurf"></b></div><input type="range" id="rSurf" min="20" max="400" step="5" value="120" aria-label="Surface habitable en mètres carrés"></div>
+      <div class="range"><div class="range-top"><span class="cap">Travaux envisagés</span><b id="vTrav"></b></div><input type="range" id="rTrav" min="0" max="200000" step="1000" value="15000" aria-label="Montant des travaux envisagés"></div>
+      <div class="range"><div class="range-top"><span class="cap">Déménagement & installation</span><b id="vDem"></b></div><input type="range" id="rDem" min="0" max="15000" step="250" value="2500" aria-label="Frais de déménagement et d'installation"></div>
       <div class="range" style="border-bottom:0"><span class="cap">Type de bien</span>
         <div class="seg" role="group" aria-label="Ancien ou neuf"><button type="button" aria-pressed="true" data-nf="0.077">Ancien</button><button type="button" aria-pressed="false" data-nf="0.025">Neuf</button></div>
       </div>
     </div>
-    <div class="sim-out" aria-live="polite">
-      <p class="cap" style="color:var(--stone)">Mensualité estimée</p>
-      <p class="big" id="oMens"></p>
+    <div class="sim-out dark" aria-live="polite">
+      <p class="cap" style="color:var(--stone)">Budget total du projet</p>
+      <p class="big" id="oTot"></p>
       <dl>
+        <dt>Prix du bien</dt><dd id="oPrix"></dd>
         <dt>Frais de notaire estimés</dt><dd id="oNot"></dd>
-        <dt>Montant emprunté</dt><dd id="oEmp"></dd>
-        <dt>Coût total du crédit</dt><dd id="oCout"></dd>
-        <dt>Revenus conseillés (35 %)</dt><dd id="oRev"></dd>
+        <dt>Travaux & installation</dt><dd id="oTrav"></dd>
+        <dt>Prix au m², frais inclus</dt><dd id="oM2"></dd>
       </dl>
-      <p class="tiny" style="color:var(--stone);margin-top:20px">Simulation indicative hors assurance emprunteur, sans valeur contractuelle.</p>
+      <p class="tiny" style="color:var(--stone);margin-top:20px">Estimation indicative : frais de notaire d'environ 7 à 8 % dans l'ancien et 2 à 3 % dans le neuf. Le montant exact est fixé par le notaire.</p>
+      <a class="btn btn-solid" href="#contact" style="margin-top:24px">Parler de mon projet</a>
     </div>
   </div>
 </section>
@@ -570,7 +571,7 @@
         <li>Vente de maisons & appartements <span>Mandats simples et exclusifs</span></li>
         <li>Immeubles & fonds de commerce <span>Transactions professionnelles</span></li>
         <li>Estimation <span>Avis de valeur écrit, offert</span></li>
-        <li>Accompagnement acquéreur <span>Recherche, visites, financement</span></li>
+        <li>Accompagnement acquéreur <span>Recherche, visites, négociation</span></li>
       </ul>
     </div>
   </div>
@@ -647,7 +648,7 @@
   <div class="f-mega" aria-hidden="true">Dubernet</div>
   <div class="f-cols">
     <div><h4>Dubernet Immobilier</h4><p>123 rue Exemple<br>46000 Cahors</p><a href="tel:+33641478339">06 41 47 83 39</a></div>
-    <div><h4>Acheter</h4><a href="#biens">Nos biens</a><a href="#simulateur">Simulateur de prêt</a><a href="#contact">Alerte e-mail</a></div>
+    <div><h4>Acheter</h4><a href="#biens">Nos biens</a><a href="#simulateur">Calcul du budget</a><a href="#contact">Alerte e-mail</a></div>
     <div><h4>Vendre</h4><a href="#vendre">Estimation offerte</a><a href="#agence">Nos services</a><a href="#contact">Nous confier un mandat</a></div>
     <div><h4>Informations</h4><a href="#">Barème des honoraires</a><a href="#">Mentions légales</a><a href="#">Politique de confidentialité</a></div>
   </div>
@@ -798,7 +799,7 @@ function openBien(id,push=true){
         <h3 class="h3" style="margin-top:40px">Les atouts</h3>
         <ul class="atouts">${b.atouts.map(a=>`<li>${a}</li>`).join("")}</ul>
         ${dpeBlock}
-        ${b.statut!=="Vendu"&&b.type!=="Commerce"?`<p style="margin-top:32px"><a class="btn" href="#simulateur" data-sim="${b.prix}">Simuler mon financement</a></p>`:""}
+        ${b.statut!=="Vendu"&&b.type!=="Commerce"?`<p style="margin-top:32px"><a class="btn" href="#simulateur" data-sim="${b.prix}" data-surf="${b.surf||100}">Calculer mon budget tout compris</a></p>`:""}
       </div>
       <aside class="aside">
         <p class="cap muted">Ce bien vous intéresse ?</p>
@@ -820,7 +821,7 @@ function openBien(id,push=true){
   if(push)history.pushState({bien:id},"","#bien-"+id);
   m.querySelectorAll("[data-g]").forEach(x=>x.onclick=()=>gal(gi+ +x.dataset.g));
   m.querySelectorAll("[data-t]").forEach(x=>x.onclick=()=>gal(+x.dataset.t));
-  const s=m.querySelector("[data-sim]");if(s)s.onclick=e=>{e.preventDefault();$("#rPrix").value=s.dataset.sim;$("#rApport").value=Math.round(s.dataset.sim*.1/1000)*1000;sim();closeBien();setTimeout(()=>document.getElementById("simulateur").scrollIntoView({behavior:"smooth"}),50)};
+  const s=m.querySelector("[data-sim]");if(s)s.onclick=e=>{e.preventDefault();$("#rPrix").value=s.dataset.sim;$("#rSurf").value=s.dataset.surf;sim();closeBien();setTimeout(()=>document.getElementById("simulateur").scrollIntoView({behavior:"smooth"}),50)};
   $("#visitForm").addEventListener("submit",ev=>{ev.preventDefault();if(!validate(ev.target))return;ev.target.querySelectorAll(".fld,button,a").forEach(x=>x.style.display="none");$("#visitOk").classList.add("on")});
 }
 function gal(i){const b=cur;gi=(i+b.imgs.length)%b.imgs.length;const im=$("#gImg");im.src=U(b.imgs[gi],1800);im.alt=`${b.titre}, photo ${gi+1}`;
@@ -853,14 +854,14 @@ estim.addEventListener("submit",e=>{e.preventDefault();if(!validate(estim.queryS
 $("#alertForm").addEventListener("submit",e=>{e.preventDefault();if(!validate(e.target))return;e.target.querySelectorAll(".fld,.full:not(.ok)").forEach(x=>x.style.display="none");$("#alertOk").classList.add("on")});
 $("#contactForm").addEventListener("submit",e=>{e.preventDefault();if(!validate(e.target))return;e.target.querySelectorAll(".fld,label,div").forEach(x=>x.style.display="none");$("#contactOk").classList.add("on")});
 
-/* ---- Simulateur ---- */
+/* ---- Budget d'achat ---- */
 let nf=.077;
-function sim(){const P=+$("#rPrix").value,A=Math.min(+$("#rApport").value,P),N=+$("#rDuree").value,T=+$("#rTaux").value;
-  const not=Math.round(P*nf),emp=Math.max(P+not-A,0),r=T/100/12,n=N*12,m=r?emp*r/(1-Math.pow(1+r,-n)):emp/n;
-  $("#vPrix").textContent=fmt(P);$("#vApport").textContent=fmt(A);$("#vDuree").textContent=N+" ans";$("#vTaux").textContent=T.toFixed(2).replace(".",",")+" %";
-  $("#oMens").textContent=Math.round(m).toLocaleString("fr-FR")+" €";$("#oNot").textContent=fmt(not);$("#oEmp").textContent=fmt(Math.round(emp));
-  $("#oCout").textContent=fmt(Math.round(m*n-emp));$("#oRev").textContent=fmt(Math.round(m/.35))+" / mois"}
-["#rPrix","#rApport","#rDuree","#rTaux"].forEach(s=>$(s).addEventListener("input",sim));
+function sim(){const P=+$("#rPrix").value,S=+$("#rSurf").value,T=+$("#rTrav").value,D=+$("#rDem").value;
+  const not=Math.round(P*nf),tot=P+not+T+D;
+  $("#vPrix").textContent=fmt(P);$("#vSurf").textContent=S+" m²";$("#vTrav").textContent=fmt(T);$("#vDem").textContent=fmt(D);
+  $("#oTot").textContent=fmt(tot);$("#oPrix").textContent=fmt(P);$("#oNot").textContent=fmt(not);$("#oTrav").textContent=fmt(T+D);
+  $("#oM2").textContent=fmt(Math.round(tot/S))}
+["#rPrix","#rSurf","#rTrav","#rDem"].forEach(s=>$(s).addEventListener("input",sim));
 document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{nf=+b.dataset.nf;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));sim()});
 
 /* ---- Menu mobile ---- */
