@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dubernet Immobilier — Agence immobilière à Cahors et dans le Lot</title>
+<meta name="description" content="Dubernet Immobilier, agence immobilière à Cahors depuis 2012 : achat, vente, estimation offerte, immeubles et fonds de commerce dans le Lot. Noté 5/5 par ses clients.">
+<meta name="theme-color" content="#41443e">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dubernet Immobilier — Cahors & le Lot">
+<meta property="og:description" content="Achat, vente et estimation de biens immobiliers à Cahors et dans le Lot depuis 2012.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=1200&h=630&fit=crop&q=80">
+<meta property="og:locale" content="fr_FR">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Dubernet Immobilier","foundingDate":"2012","founder":{"@type":"Person","name":"Pierre Dubernet de Garros"},
+"address":{"@type":"PostalAddress","streetAddress":"123 rue Exemple","postalCode":"46000","addressLocality":"Cahors","addressCountry":"FR"},
+"telephone":"+33641478339","areaServed":"Lot (46)","aggregateRating":{"@type":"AggregateRating","ratingValue":"5","reviewCount":"23"},
+"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":"Monday","opens":"15:00","closes":"19:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"19:00"}]}
+</script>
+<style>
+  :root{
+    --linen:#f2f0ed;   /* fond principal */
+    --mist:#e4e1dc;    /* filets */
+    --stone:#c1bfbc;   /* surfaces secondaires */
+    --taupe:#6f685e;   /* texte discret (contraste AA) */
+    --olive:#41443e;   /* bandes sombres */
+    --floor:#050505;
+    --ink:#000;
+    --pad:clamp(16px,9vw,150px);
+    --gap:clamp(56px,8vw,96px);
+    --mega:"Bodoni Moda","Didot",Georgia,serif;
+    --serif:"Playfair Display",Georgia,serif;
+    --sans:"Inter",system-ui,-apple-system,Arial,sans-serif;
+    --dpeA:#009c6d;--dpeB:#52b153;--dpeC:#a5cc74;--dpeD:#f4e70f;--dpeE:#f0b40f;--dpeF:#eb8235;--dpeG:#d7221f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;border-radius:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--linen);color:var(--ink);font:400 15px/1.55 var(--sans);letter-spacing:-.004em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button,input,select,textarea{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid currentColor;outline-offset:3px}
+  section{scroll-margin-top:64px}
+  .px{padding-left:var(--pad);padding-right:var(--pad)}
+  .dark{background:var(--olive);color:var(--linen)}
+  .dark .muted{color:var(--stone)}
+  .muted{color:var(--taupe)}
+
+  /* ---- Typo ---- */
+  .cap{font:500 12px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+  .d1{font:400 clamp(56px,11vw,185px)/.8 var(--serif);letter-spacing:-.02em}
+  .d2{font:400 clamp(44px,7vw,110px)/.85 var(--serif);letter-spacing:-.02em}
+  .h2{font:400 clamp(30px,3.4vw,44px)/1 var(--serif);letter-spacing:-.01em}
+  .h3{font:400 clamp(22px,2vw,30px)/1.05 var(--serif)}
+  .it{font-style:italic}
+  .lead{font:400 clamp(17px,1.4vw,20px)/1.45 var(--serif)}
+
+  /* ---- Buttons ---- */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 26px;border:1px solid currentColor;background:transparent;
+    font:500 13px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:opacity .2s,background .2s,color .2s}
+  .btn:hover{opacity:.7}
+  .btn-solid{background:var(--ink);color:var(--linen);border-color:var(--ink)}
+  .dark .btn-solid{background:var(--linen);color:var(--ink);border-color:var(--linen)}
+  .btn-solid:hover{opacity:.85}
+  .ring{width:48px;height:48px;border:1px solid currentColor;border-radius:50%!important;display:inline-grid;place-items:center;background:transparent;cursor:pointer;flex:none;transition:opacity .2s}
+  .ring:hover{opacity:.6}
+
+  /* ---- Demo ribbon ---- */
+  .ribbon{background:var(--floor);color:var(--stone);font-size:12px;padding:9px var(--pad);display:flex;gap:12px;justify-content:space-between;align-items:center}
+  .ribbon a{color:var(--linen);text-decoration:underline;text-underline-offset:3px}
+  .ribbon button{background:none;border:0;color:var(--stone);cursor:pointer;font-size:18px;line-height:1;padding:4px}
+
+  /* ---- Nav ---- */
+  .nav{position:sticky;top:0;z-index:60;background:var(--linen);border-bottom:1px solid var(--mist)}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .logo{font:400 26px/1 var(--mega);letter-spacing:-.02em;white-space:nowrap}
+  .logo small{font:500 10px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;margin-left:8px;color:var(--taupe);vertical-align:4px}
+  .menu{display:flex;gap:28px}
+  .menu a{font:500 13px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:8px 0;transition:opacity .2s}
+  .menu a:hover{opacity:.55}
+  .nav-r{display:flex;align-items:center;gap:10px}
+  .tel{font:500 14px/1 var(--sans);white-space:nowrap;padding:8px 4px}
+  .fav-btn{position:relative}
+  .fav-n{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 4px;background:var(--ink);color:var(--linen);font:500 10px/18px var(--sans);text-align:center;border-radius:9px!important;display:none}
+  .fav-n.on{display:block}
+  .burger{display:none}
+  .drawer{position:fixed;inset:0;z-index:80;background:var(--olive);color:var(--linen);display:flex;flex-direction:column;padding:16px var(--pad) 32px;transform:translateY(-100%);transition:transform .45s cubic-bezier(.7,0,.2,1);visibility:hidden}
+  .drawer.open{transform:none;visibility:visible}
+  .drawer-top{display:flex;justify-content:space-between;align-items:center;height:48px;margin-bottom:24px}
+  .drawer nav a{display:block;font:400 clamp(40px,11vw,64px)/1 var(--serif);padding:12px 0;border-bottom:1px solid rgba(242,240,237,.15)}
+  .drawer-foot{margin-top:auto;display:grid;gap:12px}
+
+  /* ---- Hero ---- */
+  .hero{position:relative;overflow:hidden;padding-top:clamp(32px,6vw,72px);padding-bottom:clamp(32px,5vw,64px)}
+  .hero-meta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:clamp(24px,5vw,56px)}
+  .hero-word{position:relative;text-align:center;line-height:.8;user-select:none;margin:0 calc(var(--pad) * -1)}
+  .hero-word h1{font:400 clamp(72px,21vw,360px)/.8 var(--mega);letter-spacing:-.045em;white-space:nowrap;position:relative;z-index:1}
+  .hero-word figure{position:absolute;left:50%;top:50%;width:clamp(120px,24vw,400px);aspect-ratio:3/4;transform:translate(-50%,-46%);z-index:2;overflow:hidden}
+  .hero-word figure img{width:100%;height:100%;object-fit:cover}
+  .hero-sub{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:end;margin-top:clamp(56px,9vw,140px)}
+  .hero-sub p{max-width:440px}
+
+  /* ---- Search ---- */
+  .search{display:grid;grid-template-columns:repeat(4,1fr) auto;border:1px solid rgba(242,240,237,.35);margin-top:clamp(32px,5vw,56px)}
+  .search label{display:flex;flex-direction:column;gap:4px;padding:14px 18px;border-right:1px solid rgba(242,240,237,.35);min-width:0}
+  .search span{font:500 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--stone)}
+  .search select,.search input{background:transparent;border:0;outline:none;font:400 18px/1.3 var(--serif);color:var(--linen);width:100%;padding:2px 0;-webkit-appearance:none;appearance:none;border-radius:0}
+  .search select option{color:#000}
+  .search input::placeholder{color:var(--stone)}
+  .search .btn{height:100%;min-height:68px;border:0;padding:0 32px}
+
+  /* ---- Proof strip ---- */
+  .proof{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--mist)}
+  .proof div{padding:28px 20px 28px 0}
+  .proof div+div{padding-left:20px;border-left:1px solid var(--mist)}
+  .proof b{display:block;font:400 clamp(34px,4vw,56px)/1 var(--serif);margin-bottom:8px}
+  .stars{letter-spacing:2px}
+
+  /* ---- Section head ---- */
+  .sec{padding-top:var(--gap);padding-bottom:var(--gap)}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+  .head .cap{margin-bottom:18px}
+
+  /* ---- Listings ---- */
+  .toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;padding:16px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--mist);margin-bottom:32px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{min-height:40px;padding:0 16px;border:1px solid var(--stone);background:transparent;cursor:pointer;font:500 12px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;transition:.2s}
+  .chip[aria-pressed=true]{background:var(--ink);color:var(--linen);border-color:var(--ink)}
+  .tools-r{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .sort{min-height:40px;border:1px solid var(--stone);background:transparent;padding:0 12px;font:500 12px/1 var(--sans);letter-spacing:.04em}
+  .count{font-size:13px;color:var(--taupe)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px 28px}
+  .card{cursor:pointer;display:flex;flex-direction:column}
+  .card-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--stone)}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:opacity .4s}
+  .card:hover .card-img img{opacity:.88}
+  .tag{position:absolute;top:0;left:0;background:var(--linen);color:var(--ink);padding:8px 12px;font:500 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+  .tag.sold{background:var(--ink);color:var(--linen)}
+  .heart{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:50%!important;border:0;background:rgba(242,240,237,.92);display:grid;place-items:center;cursor:pointer}
+  .heart svg{width:18px;height:18px;fill:none;stroke:#000;stroke-width:1.5}
+  .heart[aria-pressed=true] svg{fill:#000}
+  .card-body{padding-top:16px;display:grid;gap:6px}
+  .card-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .card h3{font:400 24px/1.1 var(--serif)}
+  .price{font:400 22px/1.1 var(--serif);white-space:nowrap}
+  .specs{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;color:var(--taupe)}
+  .empty{grid-column:1/-1;padding:64px 0;text-align:center;border:1px solid var(--mist)}
+  .note{font-size:12px;color:var(--taupe);margin-top:40px}
+
+  /* ---- Modal ---- */
+  .modal{position:fixed;inset:0;z-index:90;background:var(--linen);overflow-y:auto;-webkit-overflow-scrolling:touch;display:none}
+  .modal.open{display:block}
+  .m-bar{position:sticky;top:0;z-index:2;background:var(--linen);border-bottom:1px solid var(--mist);display:flex;justify-content:space-between;align-items:center;height:64px;gap:12px}
+  .m-bar-r{display:flex;gap:8px;align-items:center}
+  .gal{position:relative;background:var(--floor);aspect-ratio:16/8;max-height:64vh;width:100%;overflow:hidden}
+  .gal img{width:100%;height:100%;object-fit:cover}
+  .gal-nav{position:absolute;bottom:16px;right:16px;display:flex;gap:8px}
+  .gal-nav .ring{background:rgba(242,240,237,.92);border-color:transparent}
+  .gal-i{position:absolute;bottom:16px;left:16px;background:var(--linen);padding:8px 12px;font:500 12px/1 var(--sans)}
+  .thumbs{display:flex;gap:8px;padding-top:8px;overflow-x:auto}
+  .thumbs button{flex:none;width:96px;aspect-ratio:4/3;border:0;padding:0;cursor:pointer;opacity:.5;background:none}
+  .thumbs button[aria-current=true]{opacity:1}
+  .thumbs img{width:100%;height:100%;object-fit:cover}
+  .m-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(32px,6vw,96px);padding-top:48px;padding-bottom:var(--gap)}
+  .m-specs{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);margin:32px 0}
+  .m-specs div{padding:16px 12px 16px 0;border-bottom:1px solid var(--mist)}
+  .m-specs b{display:block;font:400 26px/1 var(--serif);margin-bottom:6px}
+  .m-specs span{font-size:12px;color:var(--taupe)}
+  .atouts{list-style:none;columns:2;gap:24px;margin-top:24px}
+  .atouts li{padding:10px 0;border-bottom:1px solid var(--mist);break-inside:avoid}
+  .dpe{display:grid;gap:3px;margin-top:16px;max-width:360px}
+  .dpe div{height:26px;display:flex;align-items:center;padding-left:10px;font:500 12px/1 var(--sans);color:#000;opacity:.3}
+  .dpe div.on{opacity:1;outline:2px solid #000;outline-offset:1px}
+  .aside{position:sticky;top:88px;align-self:start;border:1px solid var(--ink);padding:28px}
+  .form{display:grid;gap:12px;align-content:start}
+  .fld{display:grid;gap:6px}
+  .fld>span{font:500 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--taupe)}
+  .fld input,.fld select,.fld textarea{width:100%;min-height:48px;padding:12px 14px;background:transparent;border:1px solid var(--stone);outline:none;font-size:16px;-webkit-appearance:none;appearance:none}
+  .fld select{background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 18px) 21px,calc(100% - 13px) 21px;background-size:5px 5px;background-repeat:no-repeat;padding-right:36px}
+  .fld input:focus,.fld select:focus,.fld textarea:focus{border-color:currentColor}
+  .fld textarea{min-height:96px;resize:vertical}
+  .dark .fld input,.dark .fld select,.dark .fld textarea{border-color:rgba(242,240,237,.35)}
+  .dark .fld select option{color:#000}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .ok{display:none;padding:16px;border:1px solid currentColor;font-size:14px}
+  .ok.on{display:block}
+  .tiny{font-size:12px;color:var(--taupe)}
+
+  /* ---- Vendre / estimation ---- */
+  .sell{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px)}
+  .steps-ind{display:flex;gap:6px;margin-bottom:24px}
+  .steps-ind i{flex:1;height:2px;background:rgba(242,240,237,.25)}
+  .steps-ind i.on{background:var(--linen)}
+  .step{display:none}
+  .step.on{display:grid;gap:12px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .opt input{position:absolute;opacity:0;pointer-events:none}
+  .opt span{display:flex;align-items:center;min-height:56px;padding:0 16px;border:1px solid rgba(242,240,237,.35);cursor:pointer;font:400 18px/1.2 var(--serif);transition:.2s}
+  .opt input:checked+span{background:var(--linen);color:var(--ink)}
+  .opt input:focus-visible+span{outline:2px solid var(--linen);outline-offset:2px}
+  .step-nav{display:flex;gap:8px;margin-top:12px}
+  .sell-list{list-style:none;border-top:1px solid rgba(242,240,237,.3);margin-top:32px}
+  .sell-list li{display:grid;grid-template-columns:48px 1fr;padding:18px 0;border-bottom:1px solid rgba(242,240,237,.3)}
+  .sell-list b{font:400 20px/1 var(--serif)}
+
+  /* ---- Full-bleed band ---- */
+  .band{position:relative;height:clamp(360px,70vh,720px);overflow:hidden}
+  .band img{width:100%;height:100%;object-fit:cover}
+  .band::after{content:"";position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+  .band p{z-index:1;position:absolute;left:var(--pad);bottom:28px;color:var(--linen);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+
+  /* ---- Simulator ---- */
+  .sim{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px);align-items:start}
+  .range{display:grid;gap:10px;padding:18px 0;border-bottom:1px solid var(--mist)}
+  .range-top{display:flex;justify-content:space-between;align-items:baseline}
+  .range-top b{font:400 24px/1 var(--serif)}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer}
+  input[type=range]::-webkit-slider-runnable-track{height:1px;background:var(--ink)}
+  input[type=range]::-moz-range-track{height:1px;background:var(--ink)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--ink);margin-top:-11px;border:4px solid var(--linen);box-shadow:0 0 0 1px var(--ink)}
+  input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--ink);border:4px solid var(--linen)}
+  .sim-out{background:var(--olive);color:var(--linen);padding:clamp(28px,4vw,48px)}
+  .sim-out .big{font:400 clamp(56px,8vw,110px)/.85 var(--serif);margin:16px 0 28px}
+  .sim-out dl{display:grid;grid-template-columns:1fr auto;border-top:1px solid rgba(242,240,237,.3)}
+  .sim-out dt,.sim-out dd{padding:14px 0;border-bottom:1px solid rgba(242,240,237,.3)}
+  .sim-out dd{text-align:right;font:400 18px/1.2 var(--serif)}
+  .seg{display:flex;border:1px solid var(--stone)}
+  .seg button{flex:1;min-height:44px;border:0;background:transparent;cursor:pointer;font:500 12px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase}
+  .seg button[aria-pressed=true]{background:var(--ink);color:var(--linen)}
+
+  /* ---- Agence ---- */
+  .agence{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px);align-items:center}
+  .agence figure{aspect-ratio:4/5;overflow:hidden}
+  .agence figure img{width:100%;height:100%;object-fit:cover}
+  .services{list-style:none;border-top:1px solid var(--ink);margin-top:32px}
+  .services li{display:flex;justify-content:space-between;gap:16px;padding:18px 0;border-bottom:1px solid var(--mist);font:400 22px/1.2 var(--serif)}
+  .services li span{font:400 13px/1.4 var(--sans);color:var(--taupe);text-align:right;max-width:240px}
+
+  /* ---- Avis ---- */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(242,240,237,.3)}
+  .reviews blockquote{padding:32px 28px 32px 0;font:400 clamp(22px,2.2vw,30px)/1.2 var(--serif)}
+  .reviews blockquote+blockquote{padding-left:28px;border-left:1px solid rgba(242,240,237,.3)}
+  .reviews cite{display:block;margin-top:20px;font:500 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;font-style:normal;color:var(--stone)}
+
+  /* ---- Alerte ---- */
+  .alert-box{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(32px,6vw,96px);align-items:start;border-top:1px solid var(--ink);padding-top:40px}
+  .alert-form{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .alert-form .full{grid-column:1/-1}
+
+  /* ---- Contact ---- */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px)}
+  .lines{border-top:1px solid rgba(242,240,237,.3);margin-top:32px}
+  .lines>*{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid rgba(242,240,237,.3)}
+  .lines span{font:500 11px/1.6 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--stone)}
+  .lines p,.lines a{font:400 20px/1.3 var(--serif)}
+  .map{margin-top:32px;aspect-ratio:16/10;filter:grayscale(1) contrast(1.05);border:0;width:100%}
+
+  /* ---- Footer ---- */
+  footer{background:var(--floor);color:var(--stone);padding-top:64px;padding-bottom:28px;overflow:hidden}
+  .f-mega{font:400 clamp(72px,21vw,360px)/.8 var(--mega);letter-spacing:-.045em;color:var(--linen);white-space:nowrap;text-align:center;margin:0 calc(var(--pad) * -1) 48px}
+  .f-cols{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding-bottom:40px;border-bottom:1px solid #222;font-size:14px}
+  .f-cols h4{font:500 11px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--linen);margin-bottom:14px}
+  .f-cols a{display:block;padding:5px 0}
+  .f-cols a:hover{color:var(--linen)}
+  .f-bot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:20px;font-size:12px}
+
+  /* ---- Mobile CTA bar ---- */
+  .mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--linen);border-top:1px solid var(--ink);padding:8px 12px calc(8px + env(safe-area-inset-bottom));gap:8px}
+  .mbar .btn{flex:1;padding:0 8px}
+
+  /* ---- Toast ---- */
+  .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);z-index:100;background:var(--ink);color:var(--linen);padding:14px 20px;font-size:14px;transition:transform .3s;max-width:calc(100% - 32px)}
+  .toast.on{transform:translate(-50%,0)}
+
+  /* ---- Reveal ---- */
+  .rv{opacity:0;transform:translateY(16px);transition:opacity .8s ease,transform .8s ease}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}.drawer{transition:none}}
+
+  /* ---- Responsive ---- */
+  @media (max-width:1180px){
+    .menu{gap:18px}
+    .tel{display:none}
+  }
+  @media (max-width:1024px){
+    .menu{display:none}
+    .burger{display:inline-grid}
+    .grid{grid-template-columns:1fr 1fr}
+    .search{grid-template-columns:1fr 1fr}
+    .search label:nth-child(2){border-right:0}
+    .search label:nth-child(-n+2){border-bottom:1px solid rgba(242,240,237,.35)}
+    .search .btn{grid-column:1/-1;min-height:56px}
+    .search label:nth-child(4){border-right:0}
+    .search label:nth-child(3),.search label:nth-child(4){border-bottom:1px solid rgba(242,240,237,.35)}
+    .m-grid,.sell,.sim,.agence,.contact,.alert-box{grid-template-columns:1fr}
+    .aside{position:static}
+    .proof{grid-template-columns:1fr 1fr}
+    .proof div:nth-child(3){padding-left:0;border-left:0}
+    .proof div:nth-child(-n+2){border-bottom:1px solid var(--mist)}
+    .reviews{grid-template-columns:1fr}
+    .reviews blockquote+blockquote{padding-left:0;border-left:0;border-top:1px solid rgba(242,240,237,.3)}
+    .f-cols{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width:640px){
+    body{padding-bottom:72px}
+    .mbar{display:flex}
+    .nav-r .btn-hide{display:none}
+    .logo small{display:none}
+    .hero-sub{grid-template-columns:1fr}
+    .grid{grid-template-columns:1fr;gap:40px}
+    .search{grid-template-columns:1fr}
+    .search label{border-right:0!important;border-bottom:1px solid rgba(242,240,237,.35)}
+    .m-specs{grid-template-columns:1fr 1fr}
+    .atouts{columns:1}
+    .gal{aspect-ratio:4/3}
+    .opts,.row2,.alert-form{grid-template-columns:1fr}
+    .lines>*{grid-template-columns:1fr;gap:4px}
+    .services li{flex-direction:column;gap:4px}
+    .services li span{text-align:left}
+    .toolbar{flex-direction:column;flex-wrap:nowrap;align-items:stretch}
+    .tools-r{justify-content:space-between}
+    .chips{flex-wrap:nowrap;overflow-x:auto;margin:0 calc(var(--pad) * -1);padding:0 var(--pad);scrollbar-width:none}
+    .chips::-webkit-scrollbar{display:none}
+    .chip{flex:none}
+    .f-cols{grid-template-columns:1fr}
+    .toast{bottom:88px}
+    .ribbon{font-size:11px}
+    .hero-meta span:last-child{display:none}
+    .hero-word{margin-top:48px}
+    .mbar .btn{font-size:12px;letter-spacing:.04em}
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon" id="ribbon">
+  <span>Maquette de démonstration · Biens présentés à titre d'exemple · <a href="tel:+33641478339">Contacter le créateur</a></span>
+  <button aria-label="Masquer le bandeau" onclick="this.parentNode.remove()">×</button>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="px nav-in">
+    <a href="#top" class="logo" aria-label="Dubernet Immobilier, accueil">Dubernet<small>Immobilier</small></a>
+    <nav class="menu" aria-label="Navigation principale">
+      <a href="#biens">Acheter</a>
+      <a href="#vendre">Vendre</a>
+      <a href="#simulateur">Financer</a>
+      <a href="#agence">L'agence</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-r">
+      <a class="tel" href="tel:+33641478339">06 41 47 83 39</a>
+      <button class="ring fav-btn" id="favNav" aria-label="Voir mes favoris">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>
+        <span class="fav-n" id="favN">0</span>
+      </button>
+      <a class="btn btn-solid btn-hide" href="#vendre">Estimer mon bien</a>
+      <button class="ring burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="drawer">
+        <svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M4 9h16M4 15h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer-top">
+    <span class="logo">Dubernet</span>
+    <button class="ring" id="drawerClose" aria-label="Fermer le menu"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav aria-label="Menu mobile">
+    <a href="#biens">Acheter</a>
+    <a href="#vendre">Vendre</a>
+    <a href="#simulateur">Financer</a>
+    <a href="#agence">L'agence</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="drawer-foot">
+    <a class="btn btn-solid" href="#vendre">Estimation offerte</a>
+    <a class="btn" href="tel:+33641478339">Appeler l'agence</a>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero dark px">
+  <div class="hero-meta cap muted">
+    <span>Agence immobilière</span>
+    <span>Cahors · Lot · Depuis 2012</span>
+  </div>
+  <div class="hero-word">
+    <h1>Dubernet</h1>
+    <figure><img src="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=900&q=80&auto=format&fit=crop" alt="Maison avec piscine à la tombée de la nuit" fetchpriority="high"></figure>
+  </div>
+  <div class="hero-sub">
+    <p class="lead">Maisons en pierre, appartements du centre historique, terrains et commerces. Nous vendons les biens du Lot avec soin, de l'estimation jusqu'à l'acte.</p>
+    <p class="cap muted" style="justify-self:end;text-align:right">★★★★★ 5/5 · 23 avis clients</p>
+  </div>
+
+  <form class="search" id="search" aria-label="Rechercher un bien">
+    <label><span>Type de bien</span>
+      <select name="type"><option value="">Tous les biens</option><option>Maison</option><option>Appartement</option><option>Terrain</option><option>Commerce</option></select>
+    </label>
+    <label><span>Commune</span>
+      <select name="ville"><option value="">Tout le Lot</option></select>
+    </label>
+    <label><span>Budget maximum</span>
+      <select name="budget"><option value="">Sans limite</option><option value="100000">100 000 €</option><option value="200000">200 000 €</option><option value="300000">300 000 €</option><option value="500000">500 000 €</option></select>
+    </label>
+    <label><span>Pièces minimum</span>
+      <select name="pieces"><option value="">Indifférent</option><option value="2">2 et +</option><option value="3">3 et +</option><option value="4">4 et +</option><option value="5">5 et +</option></select>
+    </label>
+    <button class="btn btn-solid" type="submit">Rechercher</button>
+  </form>
+</section>
+
+<!-- ============ PROOF ============ -->
+<div class="px">
+  <div class="proof">
+    <div class="rv"><b>5/5</b><span class="muted">Note moyenne sur 23 avis clients</span></div>
+    <div class="rv"><b>2012</b><span class="muted">Une agence indépendante, ancrée à Cahors</span></div>
+    <div class="rv"><b>0 €</b><span class="muted">Estimation de votre bien, offerte et sans engagement</span></div>
+    <div class="rv"><b>1</b><span class="muted">Interlocuteur unique, du mandat à la signature</span></div>
+  </div>
+</div>
+
+<!-- ============ BIENS ============ -->
+<section class="sec px" id="biens">
+  <div class="head">
+    <div>
+      <p class="cap muted">Acheter</p>
+      <h2 class="d2">Nos biens<br><span class="it">à vendre.</span></h2>
+    </div>
+    <p class="lead" style="max-width:400px">Une sélection de biens visités, photographiés et estimés par l'agence. Cliquez sur un bien pour voir sa fiche complète.</p>
+  </div>
+
+  <div class="toolbar">
+    <div class="chips" role="group" aria-label="Filtrer par type">
+      <button class="chip" data-type="" aria-pressed="true">Tous</button>
+      <button class="chip" data-type="Maison" aria-pressed="false">Maisons</button>
+      <button class="chip" data-type="Appartement" aria-pressed="false">Appartements</button>
+      <button class="chip" data-type="Terrain" aria-pressed="false">Terrains</button>
+      <button class="chip" data-type="Commerce" aria-pressed="false">Commerces</button>
+      <button class="chip" data-fav="1" aria-pressed="false">♥ Favoris</button>
+    </div>
+    <div class="tools-r">
+      <span class="count" id="count" aria-live="polite"></span>
+      <select class="sort" id="sort" aria-label="Trier les biens">
+        <option value="recent">Plus récents</option>
+        <option value="asc">Prix croissant</option>
+        <option value="desc">Prix décroissant</option>
+        <option value="surf">Surface</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p class="note">Prix indiqués honoraires inclus à la charge du vendeur, sauf mention contraire. Barème des honoraires disponible à l'agence et en bas de page.</p>
+</section>
+
+<!-- ============ BAND ============ -->
+<div class="band">
+  <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=2400&q=80&auto=format&fit=crop" alt="Séjour lumineux d'une maison rénovée" loading="lazy">
+  <p>Chaque bien est visité et photographié par l'agence</p>
+</div>
+
+<!-- ============ VENDRE ============ -->
+<section class="sec dark px" id="vendre">
+  <div class="sell">
+    <div>
+      <p class="cap muted" style="margin-bottom:18px">Vendre</p>
+      <h2 class="d2">Votre bien,<br><span class="it">au juste prix.</span></h2>
+      <p class="lead" style="margin-top:28px;max-width:460px">Une estimation fondée sur la réalité du marché local, pas sur une promesse. On visite, on compare les ventes récentes du secteur, et on vous remet un avis de valeur écrit.</p>
+      <ul class="sell-list">
+        <li><b>01</b><span>Visite de votre bien et échange sur votre projet</span></li>
+        <li><b>02</b><span>Avis de valeur écrit, argumenté par les ventes du secteur</span></li>
+        <li><b>03</b><span>Photos soignées et diffusion sur les grands portails</span></li>
+        <li><b>04</b><span>Visites qualifiées, négociation et suivi jusqu'à l'acte</span></li>
+      </ul>
+    </div>
+
+    <form id="estim" class="form" novalidate aria-label="Demande d'estimation">
+      <p class="cap muted">Estimation offerte · 3 étapes</p>
+      <div class="steps-ind"><i class="on"></i><i></i><i></i></div>
+
+      <fieldset class="step on" data-step="1" style="border:0">
+        <legend class="h2" style="margin-bottom:16px">Quel type de bien ?</legend>
+        <div class="opts">
+          <label class="opt"><input type="radio" name="etype" value="Maison" checked><span>Maison</span></label>
+          <label class="opt"><input type="radio" name="etype" value="Appartement"><span>Appartement</span></label>
+          <label class="opt"><input type="radio" name="etype" value="Terrain"><span>Terrain</span></label>
+          <label class="opt"><input type="radio" name="etype" value="Immeuble / commerce"><span>Immeuble / commerce</span></label>
+        </div>
+        <div class="step-nav"><button type="button" class="btn btn-solid" data-next>Continuer</button></div>
+      </fieldset>
+
+      <fieldset class="step" data-step="2" style="border:0">
+        <legend class="h2" style="margin-bottom:16px">Parlez-nous du bien</legend>
+        <label class="fld"><span>Commune</span><input name="eville" placeholder="Ex. : Cahors, Pradines…" autocomplete="address-level2"></label>
+        <div class="row2">
+          <label class="fld"><span>Surface (m²)</span><input name="esurf" type="number" inputmode="numeric" min="0"></label>
+          <label class="fld"><span>Pièces</span><input name="epieces" type="number" inputmode="numeric" min="0"></label>
+        </div>
+        <label class="fld"><span>État général</span>
+          <select name="eetat"><option>Bon état</option><option>À rafraîchir</option><option>Travaux à prévoir</option><option>Neuf / rénové</option></select>
+        </label>
+        <div class="step-nav"><button type="button" class="btn" data-prev>Retour</button><button type="button" class="btn btn-solid" data-next>Continuer</button></div>
+      </fieldset>
+
+      <fieldset class="step" data-step="3" style="border:0">
+        <legend class="h2" style="margin-bottom:16px">Où vous joindre ?</legend>
+        <label class="fld"><span>Nom</span><input name="enom" autocomplete="name" required></label>
+        <div class="row2">
+          <label class="fld"><span>Téléphone</span><input name="etel" type="tel" autocomplete="tel" required></label>
+          <label class="fld"><span>E-mail</span><input name="email" type="email" autocomplete="email"></label>
+        </div>
+        <div class="step-nav"><button type="button" class="btn" data-prev>Retour</button><button type="submit" class="btn btn-solid">Recevoir mon estimation</button></div>
+      </fieldset>
+      <p class="ok" id="estimOk">Merci ! Votre demande est bien reçue. L'agence vous rappelle sous 48 h pour convenir d'une visite.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ SIMULATEUR ============ -->
+<section class="sec px" id="simulateur">
+  <div class="head">
+    <div>
+      <p class="cap muted">Financer</p>
+      <h2 class="d2">Simulez<br><span class="it">votre budget.</span></h2>
+    </div>
+    <p class="lead" style="max-width:400px">Une première idée de vos mensualités et des frais de notaire, avant d'en parler à votre banque ou à votre courtier.</p>
+  </div>
+  <div class="sim">
+    <div>
+      <div class="range"><div class="range-top"><span class="cap">Prix du bien</span><b id="vPrix"></b></div><input type="range" id="rPrix" min="50000" max="800000" step="5000" value="250000" aria-label="Prix du bien"></div>
+      <div class="range"><div class="range-top"><span class="cap">Apport personnel</span><b id="vApport"></b></div><input type="range" id="rApport" min="0" max="300000" step="1000" value="30000" aria-label="Apport personnel"></div>
+      <div class="range"><div class="range-top"><span class="cap">Durée</span><b id="vDuree"></b></div><input type="range" id="rDuree" min="10" max="25" step="1" value="20" aria-label="Durée du prêt en années"></div>
+      <div class="range"><div class="range-top"><span class="cap">Taux annuel</span><b id="vTaux"></b></div><input type="range" id="rTaux" min="1" max="6" step="0.05" value="3.4" aria-label="Taux d'intérêt annuel"></div>
+      <div class="range" style="border-bottom:0"><span class="cap">Type de bien</span>
+        <div class="seg" role="group" aria-label="Ancien ou neuf"><button type="button" aria-pressed="true" data-nf="0.077">Ancien</button><button type="button" aria-pressed="false" data-nf="0.025">Neuf</button></div>
+      </div>
+    </div>
+    <div class="sim-out" aria-live="polite">
+      <p class="cap" style="color:var(--stone)">Mensualité estimée</p>
+      <p class="big" id="oMens"></p>
+      <dl>
+        <dt>Frais de notaire estimés</dt><dd id="oNot"></dd>
+        <dt>Montant emprunté</dt><dd id="oEmp"></dd>
+        <dt>Coût total du crédit</dt><dd id="oCout"></dd>
+        <dt>Revenus conseillés (35 %)</dt><dd id="oRev"></dd>
+      </dl>
+      <p class="tiny" style="color:var(--stone);margin-top:20px">Simulation indicative hors assurance emprunteur, sans valeur contractuelle.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AGENCE ============ -->
+<section class="sec px" id="agence" style="padding-top:0">
+  <div class="agence">
+    <figure class="rv"><img src="https://images.unsplash.com/photo-1599696848652-f0ff23bc911f?w=1200&q=80&auto=format&fit=crop" alt="Intérieur chaleureux et lumineux" loading="lazy"></figure>
+    <div class="rv">
+      <p class="cap muted" style="margin-bottom:18px">L'agence</p>
+      <h2 class="d2">Une agence,<br><span class="it">un nom.</span></h2>
+      <p class="lead" style="margin-top:28px">Fondée en 2012 par Pierre Dubernet de Garros, l'agence accompagne vendeurs et acquéreurs à Cahors et dans tout le Lot. Une structure indépendante, à taille humaine, où chaque dossier est suivi personnellement, du premier rendez-vous jusqu'à la remise des clés.</p>
+      <ul class="services">
+        <li>Vente de maisons & appartements <span>Mandats simples et exclusifs</span></li>
+        <li>Immeubles & fonds de commerce <span>Transactions professionnelles</span></li>
+        <li>Estimation <span>Avis de valeur écrit, offert</span></li>
+        <li>Accompagnement acquéreur <span>Recherche, visites, financement</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AVIS ============ -->
+<section class="sec dark px">
+  <div class="head">
+    <div>
+      <p class="cap muted" style="margin-bottom:18px">★★★★★ 5/5 · 23 avis</p>
+      <h2 class="d2">Ils nous ont<br><span class="it">fait confiance.</span></h2>
+    </div>
+  </div>
+  <div class="reviews">
+    <blockquote class="rv">« Toujours à l'écoute, très réactif, professionnel et d'une grande gentillesse. »<cite>Avis client · Google</cite></blockquote>
+    <blockquote class="rv">« Un agent très compétent, qui travaille ses dossiers avec rigueur et un grand souci du détail. »<cite>Avis client · Google</cite></blockquote>
+    <blockquote class="rv">« Compétent, disponible, attentionné, et un excellent négociateur. »<cite>Avis client · Google</cite></blockquote>
+  </div>
+</section>
+
+<!-- ============ ALERTE ============ -->
+<section class="sec px">
+  <div class="alert-box">
+    <div>
+      <p class="cap muted" style="margin-bottom:18px">Alerte e-mail</p>
+      <h2 class="h2">Soyez prévenu en premier.</h2>
+      <p style="margin-top:16px;max-width:380px" class="muted">Les biens les plus recherchés partent souvent avant d'être publiés. Laissez vos critères, on vous écrit dès qu'un bien correspond.</p>
+    </div>
+    <form class="alert-form" id="alertForm" novalidate>
+      <label class="fld"><span>Type</span><select name="atype"><option>Maison</option><option>Appartement</option><option>Terrain</option><option>Commerce</option></select></label>
+      <label class="fld"><span>Secteur</span><input name="asect" placeholder="Cahors et alentours"></label>
+      <label class="fld"><span>Budget max</span><input name="abud" inputmode="numeric" placeholder="250 000 €"></label>
+      <label class="fld full"><span>E-mail</span><input name="amail" type="email" autocomplete="email" required></label>
+      <div class="full" style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><button class="btn btn-solid" type="submit">Créer mon alerte</button><span class="tiny">Désinscription en un clic.</span></div>
+      <p class="ok full" id="alertOk">C'est noté ! Vous recevrez les nouveaux biens correspondant à vos critères.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="sec dark px" id="contact">
+  <div class="contact">
+    <div>
+      <p class="cap muted" style="margin-bottom:18px">Contact</p>
+      <h2 class="d2">Passez<br><span class="it">à l'agence.</span></h2>
+      <div class="lines">
+        <a href="tel:+33641478339"><span>Téléphone</span><p>06 41 47 83 39</p></a>
+        <div><span>Adresse</span><p>123 rue Exemple<br>46000 Cahors</p></div>
+        <div><span>Horaires</span><p>Lundi 15h – 19h<br>Mardi au vendredi 9h – 19h</p></div>
+      </div>
+      <iframe class="map" title="Plan d'accès à l'agence, Cahors" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Cahors%2046000&z=14&output=embed"></iframe>
+    </div>
+    <form class="form" id="contactForm" novalidate aria-label="Formulaire de contact">
+      <label class="fld"><span>Votre projet</span>
+        <select name="cproj"><option>J'achète</option><option>Je vends</option><option>Je cherche un local / fonds de commerce</option><option>Autre demande</option></select>
+      </label>
+      <div class="row2">
+        <label class="fld"><span>Nom</span><input name="cnom" autocomplete="name" required></label>
+        <label class="fld"><span>Téléphone</span><input name="ctel" type="tel" autocomplete="tel" required></label>
+      </div>
+      <label class="fld"><span>E-mail</span><input name="cmail" type="email" autocomplete="email"></label>
+      <label class="fld"><span>Message</span><textarea name="cmsg" placeholder="Bonjour, je souhaite…"></textarea></label>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--stone)"><input type="checkbox" required style="margin-top:3px;width:18px;height:18px;flex:none"> J'accepte que mes données soient utilisées pour être recontacté par l'agence.</label>
+      <div><button class="btn btn-solid" type="submit">Envoyer</button></div>
+      <p class="ok" id="contactOk">Merci, votre message est bien envoyé. L'agence vous répond rapidement.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="px">
+  <div class="f-mega" aria-hidden="true">Dubernet</div>
+  <div class="f-cols">
+    <div><h4>Dubernet Immobilier</h4><p>123 rue Exemple<br>46000 Cahors</p><a href="tel:+33641478339">06 41 47 83 39</a></div>
+    <div><h4>Acheter</h4><a href="#biens">Nos biens</a><a href="#simulateur">Simulateur de prêt</a><a href="#contact">Alerte e-mail</a></div>
+    <div><h4>Vendre</h4><a href="#vendre">Estimation offerte</a><a href="#agence">Nos services</a><a href="#contact">Nous confier un mandat</a></div>
+    <div><h4>Informations</h4><a href="#">Barème des honoraires</a><a href="#">Mentions légales</a><a href="#">Politique de confidentialité</a></div>
+  </div>
+  <div class="f-bot">
+    <span>© 2026 Dubernet Immobilier · SARL · RCS Cahors 752 951 566</span>
+    <span>Carte professionnelle transaction n° CPI 4601 XXXX XXX XXX</span>
+  </div>
+</footer>
+
+<!-- Barre d'action mobile -->
+<div class="mbar">
+  <a class="btn" href="tel:+33641478339">Appeler</a>
+  <a class="btn btn-solid" href="#vendre">Estimation offerte</a>
+</div>
+
+<!-- Fiche bien -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" hidden>
+  <div class="m-bar px">
+    <span class="logo">Dubernet</span>
+    <div class="m-bar-r">
+      <button class="ring" id="mShare" aria-label="Copier le lien du bien"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></button>
+      <button class="ring" id="mFav" aria-label="Ajouter aux favoris" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+      <button class="ring" id="mClose" aria-label="Fermer la fiche"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+  <div id="mBody"></div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const U=(id,w=1000)=>`https://images.unsplash.com/photo-${id}?w=${w}&q=80&auto=format&fit=crop`;
+const BIENS=[
+  {id:1,ref:"DUB-1042",titre:"Villa avec piscine",type:"Maison",ville:"Pradines",prix:465000,pieces:7,ch:4,surf:210,terrain:3200,dpe:"C",ges:"B",statut:"Exclusivité",
+   imgs:["1564013799919-ab600027ffc6","1600607687939-ce8a6c25118c","1505691938895-1758d7feb511","1484154218962-a197022b5858"],
+   desc:"À dix minutes de Cahors, belle maison de caractère entièrement restaurée, ouverte sur un parc arboré et une piscine chauffée. Séjour traversant, cuisine équipée, suite parentale de plain-pied et trois chambres à l'étage.",
+   atouts:["Piscine chauffée 10 × 5","Suite parentale de plain-pied","Terrain arboré de 3 200 m²","Double garage","Vue dégagée sur la vallée","Assainissement conforme"]},
+  {id:2,ref:"DUB-1051",titre:"T3 lumineux, centre historique",type:"Appartement",ville:"Cahors",prix:149000,pieces:3,ch:2,surf:68,terrain:0,dpe:"D",ges:"D",statut:"Nouveau",
+   imgs:["1522708323590-d24dbb6b0267","1484154218962-a197022b5858","1493809842364-78817add7ffb"],
+   desc:"Au cœur du secteur sauvegardé, à deux pas du boulevard Gambetta, appartement de 68 m² au deuxième étage d'un immeuble ancien bien entretenu. Belle hauteur sous plafond, parquet et cheminée d'agrément.",
+   atouts:["Proche commerces et marché","Hauteur sous plafond 3,20 m","Cave privative","Faibles charges de copropriété"]},
+  {id:3,ref:"DUB-1038",titre:"Villa contemporaine",type:"Maison",ville:"Mercuès",prix:539000,pieces:6,ch:4,surf:180,terrain:2000,dpe:"A",ges:"A",statut:"",
+   imgs:["1580587771525-78b9dba3b914","1560448204-e02f11c3d0e2","1502005229762-cf1b2da7c5d6"],
+   desc:"Architecture contemporaine aux larges baies vitrées, orientée plein sud. Pièce de vie de 70 m², cuisine ouverte, quatre chambres dont une suite, piscine à débordement et pompe à chaleur.",
+   atouts:["Construction 2019, RE 2012","Piscine à débordement","Pompe à chaleur","Domotique","Garage double"]},
+  {id:4,ref:"DUB-1047",titre:"Terrain à bâtir viabilisé",type:"Terrain",ville:"Lalbenque",prix:59000,pieces:0,ch:0,surf:0,terrain:1500,dpe:"",ges:"",statut:"",
+   imgs:["1500382017468-9049fed747ef"],
+   desc:"Beau terrain plat de 1 500 m² en bordure de village, viabilisé (eau, électricité, télécom). Exposition sud-ouest et vue sur la campagne quercynoise. Libre de constructeur.",
+   atouts:["Viabilisé","Libre de constructeur","Exposition sud-ouest","Calme, proche école"]},
+  {id:5,ref:"DUB-1029",titre:"Maison de ville rénovée",type:"Maison",ville:"Cahors",prix:229000,pieces:5,ch:3,surf:120,terrain:80,dpe:"C",ges:"C",statut:"",
+   imgs:["1502672260266-1c1ef2d93688","1533779283484-8ad4940aa3a8","1586023492125-27b2c045efd7"],
+   desc:"Maison de ville sur trois niveaux, rénovée avec goût, avec une petite cour intérieure au calme. Séjour lumineux, cuisine indépendante, trois chambres et deux salles d'eau.",
+   atouts:["Cour intérieure","Rénovation récente","Proche gare et centre","Double vitrage"]},
+  {id:6,ref:"DUB-1033",titre:"Loft sous verrière",type:"Appartement",ville:"Cahors",prix:189000,pieces:4,ch:2,surf:95,terrain:0,dpe:"C",ges:"B",statut:"Sous compromis",
+   imgs:["1600210492486-724fe5c67fb0","1600573472550-8090b5e0745e"],
+   desc:"Ancien atelier transformé en loft de 95 m², baigné de lumière grâce à sa verrière. Grand volume ouvert, mezzanine et deux chambres. Une adresse rare.",
+   atouts:["Verrière zénithale","Mezzanine","Place de stationnement","Dernier étage"]},
+  {id:7,ref:"DUB-1050",titre:"Fonds de commerce, restaurant",type:"Commerce",ville:"Cahors",prix:135000,pieces:0,ch:0,surf:160,terrain:0,dpe:"D",ges:"C",statut:"Nouveau",
+   imgs:["1555396273-367ea4eb4db5","1517248135467-4c7edcad34c4"],
+   desc:"Cession d'un fonds de commerce de restauration en hyper-centre, 60 couverts en salle et terrasse. Cuisine professionnelle aux normes, bail commercial 3-6-9 récent. Clientèle fidèle.",
+   atouts:["Licence restaurant","Terrasse","Cuisine aux normes","Bail 3-6-9 récent"]},
+  {id:8,ref:"DUB-1019",titre:"Maison familiale avec jardin",type:"Maison",ville:"Le Montat",prix:279000,pieces:5,ch:4,surf:140,terrain:1100,dpe:"B",ges:"A",statut:"Vendu",
+   imgs:["1523217582562-09d0def993a6","1613545325278-f24b0cae1224","1617104678098-de229db51175"],
+   desc:"Maison récente de plain-pied, au calme d'un quartier résidentiel, avec un jardin clos et arboré. Quatre chambres, grande pièce de vie ouverte sur la terrasse.",
+   atouts:["Plain-pied","Jardin clos","Quartier calme","Proche écoles"]}
+];
+const DPE=["A","B","C","D","E","F","G"];
+const fmt=n=>n.toLocaleString("fr-FR")+" €";
+const $=s=>document.querySelector(s);
+
+/* ---- Favoris ---- */
+let favs=[];try{favs=JSON.parse(localStorage.getItem("dub-favs")||"[]")}catch(e){}
+const saveFavs=()=>{try{localStorage.setItem("dub-favs",JSON.stringify(favs))}catch(e){};const n=$("#favN");n.textContent=favs.length;n.classList.toggle("on",favs.length>0)};
+const toggleFav=id=>{favs=favs.includes(id)?favs.filter(x=>x!==id):[...favs,id];saveFavs();toast(favs.includes(id)?"Ajouté à vos favoris":"Retiré de vos favoris");render()};
+
+/* ---- Toast ---- */
+let tt;function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2200)}
+
+/* ---- Filtres ---- */
+const state={type:"",ville:"",budget:0,pieces:0,fav:false,sort:"recent"};
+const villes=[...new Set(BIENS.map(b=>b.ville))].sort();
+villes.forEach(v=>$("#search [name=ville]").insertAdjacentHTML("beforeend",`<option>${v}</option>`));
+
+function card(b){
+  const fav=favs.includes(b.id);
+  const specs=[b.surf?b.surf+" m²":null,b.pieces?b.pieces+" pièces":null,b.ch?b.ch+" ch.":null,b.terrain?"Terrain "+b.terrain.toLocaleString("fr-FR")+" m²":null].filter(Boolean);
+  return `<article class="card rv" tabindex="0" role="button" aria-label="Voir la fiche : ${b.titre}, ${b.ville}" data-id="${b.id}">
+    <div class="card-img">
+      <img src="${U(b.imgs[0],800)}" alt="${b.titre} à ${b.ville}" loading="lazy">
+      ${b.statut?`<span class="tag ${b.statut==="Vendu"?"sold":""}">${b.statut}</span>`:""}
+      <button class="heart" data-heart="${b.id}" aria-pressed="${fav}" aria-label="${fav?"Retirer des":"Ajouter aux"} favoris"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button>
+    </div>
+    <div class="card-body">
+      <p class="cap muted">${b.type} · ${b.ville}</p>
+      <div class="card-top"><h3>${b.titre}</h3></div>
+      <p class="price">${b.statut==="Vendu"?"Vendu":fmt(b.prix)}</p>
+      <p class="specs">${specs.map(s=>`<span>${s}</span>`).join("")}</p>
+    </div>
+  </article>`;
+}
+function render(){
+  let list=BIENS.filter(b=>(!state.type||b.type===state.type)&&(!state.ville||b.ville===state.ville)&&(!state.budget||b.prix<=state.budget)&&(!state.pieces||b.pieces>=state.pieces)&&(!state.fav||favs.includes(b.id)));
+  if(state.sort==="asc")list.sort((a,b)=>a.prix-b.prix);
+  if(state.sort==="desc")list.sort((a,b)=>b.prix-a.prix);
+  if(state.sort==="surf")list.sort((a,b)=>(b.surf||b.terrain/10)-(a.surf||a.terrain/10));
+  $("#grid").innerHTML=list.length?list.map(card).join(""):`<div class="empty"><p class="h3">Aucun bien ne correspond pour le moment.</p><p class="muted" style="margin:10px 0 20px">Créez une alerte : on vous prévient dès qu'un bien arrive.</p><button class="btn" id="resetF">Voir tous les biens</button></div>`;
+  $("#count").textContent=list.length+" bien"+(list.length>1?"s":"");
+  document.querySelectorAll("#grid .rv").forEach(el=>io.observe(el));
+  const r=$("#resetF");if(r)r.onclick=()=>{Object.assign(state,{type:"",ville:"",budget:0,pieces:0,fav:false});$("#search").reset();syncChips();render()};
+}
+function syncChips(){document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c.dataset.fav?String(state.fav):String(!state.fav&&c.dataset.type===state.type)))}
+document.querySelectorAll(".chip").forEach(c=>c.addEventListener("click",()=>{
+  if(c.dataset.fav){state.fav=!state.fav}else{state.fav=false;state.type=c.dataset.type;$("#search [name=type]").value=state.type}
+  syncChips();render()}));
+$("#sort").addEventListener("change",e=>{state.sort=e.target.value;render()});
+$("#search").addEventListener("submit",e=>{e.preventDefault();const f=e.target;
+  Object.assign(state,{type:f.type.value,ville:f.ville.value,budget:+f.budget.value||0,pieces:+f.pieces.value||0,fav:false});syncChips();render();
+  document.getElementById("biens").scrollIntoView({behavior:"smooth"})});
+$("#favNav").addEventListener("click",()=>{state.fav=true;syncChips();render();document.getElementById("biens").scrollIntoView({behavior:"smooth"})});
+$("#grid").addEventListener("click",e=>{const h=e.target.closest("[data-heart]");if(h){e.stopPropagation();toggleFav(+h.dataset.heart);return}
+  const c=e.target.closest(".card");if(c)openBien(+c.dataset.id)});
+$("#grid").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.classList.contains("card")){e.preventDefault();openBien(+e.target.dataset.id)}});
+
+/* ---- Fiche bien ---- */
+let cur=null,gi=0,lastFocus=null;
+function openBien(id,push=true){
+  const b=BIENS.find(x=>x.id===id);if(!b)return;cur=b;gi=0;lastFocus=document.activeElement;
+  const specs=[["Surface",b.surf?b.surf+" m²":"—"],["Pièces",b.pieces||"—"],["Chambres",b.ch||"—"],["Terrain",b.terrain?b.terrain.toLocaleString("fr-FR")+" m²":"—"]];
+  const dpeBlock=b.dpe?`<h3 class="h3" style="margin-top:40px">Performance énergétique</h3>
+    <div class="row2" style="margin-top:8px"><div><p class="tiny">Consommation (DPE) : classe ${b.dpe}</p><div class="dpe">${DPE.map((l,i)=>`<div class="${l===b.dpe?"on":""}" style="background:var(--dpe${l});width:${40+i*9}%">${l}</div>`).join("")}</div></div>
+    <div><p class="tiny">Émissions (GES) : classe ${b.ges}</p><div class="dpe">${DPE.map((l,i)=>`<div class="${l===b.ges?"on":""}" style="background:${["#f6edfd","#e4c7fb","#d6aaf4","#cc93f4","#bb72f3","#a94cee","#8b1ae1"][i]};width:${40+i*9}%">${l}</div>`).join("")}</div></div></div>
+    <p class="tiny" style="margin-top:12px">Montant estimé des dépenses annuelles d'énergie pour un usage standard : communiqué sur demande.</p>`:`<p class="tiny" style="margin-top:32px">Bien non soumis au diagnostic de performance énergétique.</p>`;
+  $("#mBody").innerHTML=`
+    <div class="px" style="padding-top:24px">
+      <div class="gal"><img id="gImg" src="${U(b.imgs[0],1800)}" alt="${b.titre}, photo 1">
+        ${b.imgs.length>1?`<span class="gal-i" id="gIdx">1 / ${b.imgs.length}</span><div class="gal-nav"><button class="ring" data-g="-1" aria-label="Photo précédente">←</button><button class="ring" data-g="1" aria-label="Photo suivante">→</button></div>`:""}
+      </div>
+      ${b.imgs.length>1?`<div class="thumbs">${b.imgs.map((im,i)=>`<button data-t="${i}" aria-label="Photo ${i+1}" aria-current="${i===0}"><img src="${U(im,240)}" alt=""></button>`).join("")}</div>`:""}
+    </div>
+    <div class="m-grid px">
+      <div>
+        <p class="cap muted">${b.type} · ${b.ville} · Réf. ${b.ref}${b.statut?" · "+b.statut:""}</p>
+        <h2 class="d2" id="mTitle" style="margin-top:16px">${b.titre}</h2>
+        <p class="h2" style="margin-top:20px">${b.statut==="Vendu"?"Vendu":fmt(b.prix)}</p>
+        ${b.statut!=="Vendu"?`<p class="tiny" style="margin-top:6px">Honoraires à la charge du vendeur</p>`:""}
+        <div class="m-specs">${specs.map(([k,v])=>`<div><b>${v}</b><span>${k}</span></div>`).join("")}</div>
+        <p class="lead">${b.desc}</p>
+        <h3 class="h3" style="margin-top:40px">Les atouts</h3>
+        <ul class="atouts">${b.atouts.map(a=>`<li>${a}</li>`).join("")}</ul>
+        ${dpeBlock}
+        ${b.statut!=="Vendu"&&b.type!=="Commerce"?`<p style="margin-top:32px"><a class="btn" href="#simulateur" data-sim="${b.prix}">Simuler mon financement</a></p>`:""}
+      </div>
+      <aside class="aside">
+        <p class="cap muted">Ce bien vous intéresse ?</p>
+        <h3 class="h2" style="margin:12px 0 20px">Demander une visite</h3>
+        <form class="form" id="visitForm" novalidate>
+          <label class="fld"><span>Nom</span><input name="vnom" autocomplete="name" required></label>
+          <label class="fld"><span>Téléphone</span><input name="vtel" type="tel" autocomplete="tel" required></label>
+          <label class="fld"><span>Disponibilités</span><select name="vdispo"><option>En semaine</option><option>Le samedi</option><option>Indifférent</option></select></label>
+          <label class="fld"><span>Message</span><textarea name="vmsg">Bonjour, je souhaite visiter le bien réf. ${b.ref}.</textarea></label>
+          <button class="btn btn-solid" type="submit">Envoyer ma demande</button>
+          <a class="btn" href="tel:+33641478339">Appeler l'agence</a>
+          <p class="ok" id="visitOk">Merci ! L'agence vous rappelle pour fixer la visite.</p>
+        </form>
+      </aside>
+    </div>`;
+  const m=$("#modal");m.hidden=false;m.classList.add("open");m.scrollTop=0;document.body.style.overflow="hidden";
+  $("#mFav").setAttribute("aria-pressed",favs.includes(b.id));
+  $("#mClose").focus();
+  if(push)history.pushState({bien:id},"","#bien-"+id);
+  m.querySelectorAll("[data-g]").forEach(x=>x.onclick=()=>gal(gi+ +x.dataset.g));
+  m.querySelectorAll("[data-t]").forEach(x=>x.onclick=()=>gal(+x.dataset.t));
+  const s=m.querySelector("[data-sim]");if(s)s.onclick=e=>{e.preventDefault();$("#rPrix").value=s.dataset.sim;$("#rApport").value=Math.round(s.dataset.sim*.1/1000)*1000;sim();closeBien();setTimeout(()=>document.getElementById("simulateur").scrollIntoView({behavior:"smooth"}),50)};
+  $("#visitForm").addEventListener("submit",ev=>{ev.preventDefault();if(!validate(ev.target))return;ev.target.querySelectorAll(".fld,button,a").forEach(x=>x.style.display="none");$("#visitOk").classList.add("on")});
+}
+function gal(i){const b=cur;gi=(i+b.imgs.length)%b.imgs.length;const im=$("#gImg");im.src=U(b.imgs[gi],1800);im.alt=`${b.titre}, photo ${gi+1}`;
+  const ix=$("#gIdx");if(ix)ix.textContent=`${gi+1} / ${b.imgs.length}`;document.querySelectorAll(".thumbs button").forEach((t,k)=>t.setAttribute("aria-current",k===gi))}
+function closeBien(fromPop){const m=$("#modal");if(!m.classList.contains("open"))return;m.classList.remove("open");m.hidden=true;document.body.style.overflow="";
+  if(!fromPop&&location.hash.startsWith("#bien-"))history.pushState({}, "", location.pathname+location.search+"#biens");if(lastFocus)lastFocus.focus()}
+$("#mClose").onclick=()=>closeBien();
+$("#mFav").onclick=()=>{toggleFav(cur.id);$("#mFav").setAttribute("aria-pressed",favs.includes(cur.id))};
+$("#mShare").onclick=async()=>{const url=location.href.split("#")[0]+"#bien-"+cur.id;
+  try{if(navigator.share){await navigator.share({title:cur.titre,url});return}await navigator.clipboard.writeText(url);toast("Lien du bien copié")}catch(e){toast("Lien : "+url)}};
+document.addEventListener("keydown",e=>{if(!$("#modal").classList.contains("open"))return;if(e.key==="Escape")closeBien();if(e.key==="ArrowRight")gal(gi+1);if(e.key==="ArrowLeft")gal(gi-1)});
+window.addEventListener("popstate",()=>{const m=location.hash.match(/^#bien-(\d+)/);if(m)openBien(+m[1],false);else closeBien(true)});
+// Swipe galerie
+let sx=0;document.addEventListener("touchstart",e=>{if(e.target.closest(".gal"))sx=e.touches[0].clientX},{passive:true});
+document.addEventListener("touchend",e=>{if(!e.target.closest(".gal")||!sx)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)gal(gi+(dx<0?1:-1));sx=0},{passive:true});
+
+/* ---- Validation simple ---- */
+function validate(f){const bad=[...f.querySelectorAll("[required]")].find(i=>i.type==="checkbox"?!i.checked:!i.value.trim()||(i.type==="email"&&!/^\S+@\S+\.\S+$/.test(i.value)));
+  if(bad){bad.focus();toast("Merci de compléter ce champ");return false}return true}
+
+/* ---- Estimation multi-étapes ---- */
+const estim=$("#estim");let es=1;
+function showStep(n){es=n;estim.querySelectorAll(".step").forEach(s=>s.classList.toggle("on",+s.dataset.step===n));estim.querySelectorAll(".steps-ind i").forEach((x,i)=>x.classList.toggle("on",i<n));
+  const first=estim.querySelector(`.step[data-step="${n}"] input:not([type=radio]),.step[data-step="${n}"] input:checked`);if(first&&n>1)first.focus()}
+estim.querySelectorAll("[data-next]").forEach(b=>b.onclick=()=>showStep(es+1));
+estim.querySelectorAll("[data-prev]").forEach(b=>b.onclick=()=>showStep(es-1));
+estim.addEventListener("submit",e=>{e.preventDefault();if(!validate(estim.querySelector('[data-step="3"]')))return;estim.querySelectorAll(".step,.steps-ind").forEach(x=>x.style.display="none");$("#estimOk").classList.add("on")});
+
+/* ---- Alerte & contact ---- */
+$("#alertForm").addEventListener("submit",e=>{e.preventDefault();if(!validate(e.target))return;e.target.querySelectorAll(".fld,.full:not(.ok)").forEach(x=>x.style.display="none");$("#alertOk").classList.add("on")});
+$("#contactForm").addEventListener("submit",e=>{e.preventDefault();if(!validate(e.target))return;e.target.querySelectorAll(".fld,label,div").forEach(x=>x.style.display="none");$("#contactOk").classList.add("on")});
+
+/* ---- Simulateur ---- */
+let nf=.077;
+function sim(){const P=+$("#rPrix").value,A=Math.min(+$("#rApport").value,P),N=+$("#rDuree").value,T=+$("#rTaux").value;
+  const not=Math.round(P*nf),emp=Math.max(P+not-A,0),r=T/100/12,n=N*12,m=r?emp*r/(1-Math.pow(1+r,-n)):emp/n;
+  $("#vPrix").textContent=fmt(P);$("#vApport").textContent=fmt(A);$("#vDuree").textContent=N+" ans";$("#vTaux").textContent=T.toFixed(2).replace(".",",")+" %";
+  $("#oMens").textContent=Math.round(m).toLocaleString("fr-FR")+" €";$("#oNot").textContent=fmt(not);$("#oEmp").textContent=fmt(Math.round(emp));
+  $("#oCout").textContent=fmt(Math.round(m*n-emp));$("#oRev").textContent=fmt(Math.round(m/.35))+" / mois"}
+["#rPrix","#rApport","#rDuree","#rTaux"].forEach(s=>$(s).addEventListener("input",sim));
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{nf=+b.dataset.nf;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));sim()});
+
+/* ---- Menu mobile ---- */
+const drawer=$("#drawer"),burger=$("#burger");
+const setDrawer=o=>{drawer.classList.toggle("open",o);drawer.setAttribute("aria-hidden",!o);burger.setAttribute("aria-expanded",o);document.body.style.overflow=o?"hidden":"";if(o)$("#drawerClose").focus()};
+burger.onclick=()=>setDrawer(true);$("#drawerClose").onclick=()=>setDrawer(false);
+drawer.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>setDrawer(false)));
+
+/* ---- Apparition ---- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+
+saveFavs();render();sim();
+const h=location.hash.match(/^#bien-(\d+)/);if(h)openBien(+h[1],false);
+</script>
+</body>
+</html>
